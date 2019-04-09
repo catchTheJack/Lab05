@@ -25,26 +25,22 @@ public class Model {
 	private void calcolaAnagramma(String parola, Anagramma parziale,int L) {
 		
 		 
-		if(L==parola.length()) {
-			anagrammi.add(parziale.clone());
+		if(L==parola.length() && esisteAnagramma(parziale)==false){
+					anagrammi.add(parziale.clone());
 			return;
 			}
 	
 		
 		for(Character c : parola.toCharArray()) {
 			
-			if(!parziale.contains(c)) {
+			if(contaLettera(c,parola)>contaLettera(c,parziale.getValue())) {
+				
 				parziale.add(c);
-				
 				calcolaAnagramma(parola,parziale,L+1);
-				
 				//backtrack
 				parziale.remove(c);
 			}
-			
 		}
-		
-		
 	}
 	
 	public String getCorretti(){
@@ -67,5 +63,25 @@ public class Model {
 		return res;
 	}
 
+	public int contaLettera(Character c, String parola) {
+		int cont=0;
+		char[] caratteri = parola.toCharArray();
+		for(Character temp: caratteri) {
+			if(temp == c) {
+				cont++;
+			}
+		}
+		return cont;
+	}
 	
+	public boolean esisteAnagramma(Anagramma a) {
+		boolean e = false;
+		for(Anagramma temp: anagrammi) {
+			if(temp.equals(a)) {
+				e = true;
+				break;
+			}	
+		}
+		return e;
+	}
 }

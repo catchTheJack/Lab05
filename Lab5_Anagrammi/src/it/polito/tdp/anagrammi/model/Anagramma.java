@@ -35,8 +35,11 @@ public class Anagramma {
 	}
 
 
-	public boolean contains(Character c) {
-		return this.caratteri.contains(c);
+	public boolean contains(String s) {
+		if(s.equals(this.getValue()))
+		return true;
+		else
+		return false;
 	}
 	
 	public String getValue() {
@@ -52,6 +55,34 @@ public class Anagramma {
 	public String toString() {
 		return String.format("Anagramma [caratteri=%s]", caratteri);
 	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((caratteri == null) ? 0 : caratteri.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Anagramma other = (Anagramma) obj;
+		if (caratteri == null) {
+			if (other.caratteri != null)
+				return false;
+		} else if (!caratteri.equals(other.caratteri))
+			return false;
+		return true;
+	}
+	
 	
 	
 }

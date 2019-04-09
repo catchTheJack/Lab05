@@ -41,10 +41,13 @@ public class AnagrammiController {
     @FXML
     void doCalcola(ActionEvent event) {
     	String parola = txtParola.getText();
+    	Long start=System.nanoTime();
     	model.calcolaAnagrammaPubblico(parola);
+    	Long stop=System.nanoTime();
     	
     	txtCorretti.setText(model.getCorretti());
     	txtErrati.setText(model.getErrati());
+    	txtCorretti.appendText("Running time="+((stop-start)/1e9)+("s"));
     	
     }
 
